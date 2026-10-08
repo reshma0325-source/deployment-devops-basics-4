@@ -1,0 +1,40 @@
+Case Study 4: Process Management with PM2 and Intro to GitHub Actions
+🎯 Objective:
+Use PM2 to manage Node.js processes and add basic CI workflow.
+
+📦 PM2 Setup:
+npm install -g pm2
+pm2 start app.js --name "my-api"
+pm2 save
+📁 GitHub Actions Workflow (.github/workflows/node.yml)
+name: 🚀 Node CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v3
+
+      - name: 🟢 Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Install Dependencies
+        run: npm install
+
+      - name: ✅ Run Tests
+        run: npm test
+🧪 Practice:
+Push to GitHub → Watch workflow run
+
+Break a test → Re-push and observe CI fail
+
+Add pm2 logs and restart app after crash
+
